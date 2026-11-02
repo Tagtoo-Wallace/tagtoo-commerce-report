@@ -1,6 +1,6 @@
 # tagtoo-commerce-report：電商品牌分析報告（草稿）
 
-> 狀態：草稿 v0.7.3（2026-11-02；流程已穩定，簡報內容調整中；精簡版 5 章 14–17 頁，A-2 可續頁）。這是 Wallace 新建的工具，不是既有的上游包，也不是客戶客製版。原本放在 `tagtoo-harness-packages` 的 `drafts/commerce-report/`，2026-11-02 獨立成本公開 repo 並定為正本：同事內部試用時直接 clone，不必有 GitHub 帳號。
+> 狀態：草稿 v0.7.4（2026-11-02；流程已穩定，簡報內容調整中；精簡版 5 章 14–17 頁，A-2 可續頁）。這是 Wallace 新建的工具，不是既有的上游包，也不是客戶客製版。原本放在 `tagtoo-harness-packages` 的 `drafts/commerce-report/`，2026-11-02 獨立成本公開 repo 並定為正本：同事內部試用時直接 clone，不必有 GitHub 帳號。
 >
 > **用途**：給業務推廣、品牌客戶自己使用。設計前提是互動越少越好：客戶只回覆兩次（確認品牌與競品、確認摘要結論），不交草稿、不產 Excel。
 
@@ -10,7 +10,7 @@
 
 | 檔案 | 上傳到哪 | 狀態 |
 |---|---|---|
-| `project-instructions.md` | knowledge（「指示」欄文字見下方） | v0.7.3 |
+| `project-instructions.md` | knowledge（「指示」欄文字見下方） | v0.7.4 |
 | `docs/report-format-spec.md` | knowledge | v0.8.1 |
 | `docs/analyze.py` | knowledge | v0.5.3 新增：品牌比對、通路分類與統計。v0.5.4：讀手抄精簡格式、容量差距判斷、轉賣比例。v0.5.6：產出摘要骨架 `summary_draft.md`、組合包容量加總、液體克毫升同視（`g_ml_same`）、品牌對照表兩種寫法。v0.6.0：產出跨平台比價（自動配對）、引用商品清單、商品頁網址、上架平台指標、各平台轉賣筆數。v0.7.0：只計同品類商品（`category_keywords`）、外層件數解析修正、每單位售價各平台筆數。v0.7.2：蝦皮官方賣場改為賣場名含品牌名才算，蝦皮直營併入「連鎖與平台直營」。（v0.5.3 的 `collect_raw.py` 讀對話紀錄檔，兩場都被安全檢查擋下，v0.5.5 刪除） |
 | `docs/.gitignore` | 不上傳 | 測試期用：產簡報的暫存檔不進版控，避免沙盒提醒未提交檔案 |
@@ -46,7 +46,7 @@ B 我自己指定：最多 3 個，直接接著打品牌名，例：B 虎牌、�
 C 不比較：只看〔品牌〕自己
 客戶第一句已附品牌或競品時，跳過已回答的那題。
 
-【之後】客戶回答完上面兩題，才先用加入 repo 的工具（add_repo）加入 GitHub 的 Tagtoo-Wallace/tagtoo-commerce-report，再照它回覆的指令 clone 到 /home/claude/tcr（add_repo 不可用時，直接 git clone --depth 1 https://github.com/Tagtoo-Wallace/tagtoo-commerce-report.git /home/claude/tcr；被安全檢查擋下且沒有給判定時，原樣重送一次），讀完 /home/claude/tcr 的 project-instructions.md 與 docs/report-format-spec.md 全文，依 project-instructions.md 從步驟 ③ 繼續；build.js 也在該資料夾執行。不可只靠知識庫搜尋片段。回覆中不提 clone、檔名或指令。
+【之後】客戶回答完上面兩題，才先用加入 repo 的工具（add_repo）加入 GitHub 的 Tagtoo-Wallace/tagtoo-commerce-report，再照它回覆的指令 clone，路徑用它回覆的 workspace，不可自己改路徑（被安全檢查擋下且沒有給判定時，原樣重送一次），讀完該資料夾的 project-instructions.md 與 docs/report-format-spec.md 全文，依 project-instructions.md 從步驟 ③ 繼續；build.js 也在該資料夾執行。不可只靠知識庫搜尋片段。回覆中不提 clone、檔名或指令。
 ```
 
 【全程】三條寫在「指示」欄，是因為好神拖那場的任務清單在讀檔之前就建了，寫在檔案裡的規則管不到；確認表沒印、英文進度句也是檔案裡寫了仍發生，「指示」欄每一輪都會讀到、對話被壓縮也不會掉。
@@ -204,6 +204,9 @@ C 不比較：只看〔品牌〕自己
 - 同一天 add_repo 版（V2）沒被擋，但只比較了這兩場，原因 ◀ 待確認。
 - 補測（同日新對話）：對本公開 repo 呼叫 add_repo，回覆「已可匿名讀取，沒有附加任何東西」；接著 clone、`npm install`、`analyze.py`、`build.js`（範例資料 17 頁）全部沒被擋。公開 repo 走不走 add_repo 實質相同，V3 被擋較可能是判定不穩定。
 - v0.7.3：Wallace 決定維持 GitHub 當檔案來源，「指示」欄改回先 add_repo 再 clone（add_repo 不可用時直接 clone）。同事是否需要授權 GitHub 連接器 ◀ 待確認，第一位同事試跑即知。
+- 「測試 - 馬玉山V4」（公開 repo＋add_repo）仍被擋；改回私人 repo 後重跑（對話「馬玉山 杏仁粉」），add_repo 回覆「已加入」並給 workspace `/home/claude/tagtoo-commerce-report`，`analyze.py` 還是被擋。
+- 比對 add_repo 回覆：它會登記 workspace 路徑，並要求 clone 到那裡。V2 以前照它的路徑 clone，都沒被擋；v0.7.1 起「指示」欄把路徑改成 `/home/claude/tcr`，V3、V4 與這場都被擋。推論：腳本在登記的 workspace 外才被判為外部程式碼 ◀ 待確認（下一場實跑驗證）。
+- v0.7.4：repo 維持私人；「指示」欄改成照 add_repo 回覆的 workspace clone、不可改路徑，拿掉直接 clone 的備案（私人 repo 沒有權限也 clone 不到）。
 
 ### 各場模型對照（2026-10-29 整理）
 
