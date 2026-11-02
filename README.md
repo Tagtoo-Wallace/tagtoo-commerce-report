@@ -210,6 +210,13 @@ C 不比較：只看〔品牌〕自己
 - v0.7.4 實跑（專案對話「馬玉山 杏仁粉」，19db86d8）：add_repo 加入後 clone 到 `/home/claude/tagtoo-commerce-report` 並呼叫 `register_repo_root`；`analyze.py`、`build.js` 全程沒有任何被擋，產出 17 頁簡報。02-2 蝦皮賣家：連鎖與平台直營 3、代購 2、一般賣家 13，開南食品官方旗艦店不再算官方。路徑推論與結果一致，但目前只有這一場成功 ◀ 再跑幾場確認。
 - 小問題：同版本另一場（ae30b965，未跑完）開場回覆多了一句內部說明「客戶第一句已附品牌與產品…跳過第一題」，客戶看得到。
 
+### v0.7.4 試跑：LG 洗脫烘滾筒洗衣機 vs 國際牌、三洋、only（2026-11-02「測試 - LG 洗脫烘滾筒洗衣機」，Sonnet 5.5）
+
+- 有競品（A 推薦）版本從頭跑到尾，`analyze.py`、`build.js` 都沒被擋，17 頁（單位每件，03-2 不出）。
+- Commerce MCP 一開始又顯示要重新連線，客戶回「Use Tagtoo Commerce MCP for this」才恢復（V2 也發生過，非本工具問題）。
+- ⚠️ 沒照指示手抄：Claude 寫腳本讀 `/root/.claude/projects/` 底下的對話紀錄檔轉成 compact.json，`project-instructions.md` 明寫不要這樣做（v0.5.3 兩場都因此被擋）。這場沒被擋，但不保證下次。
+- 公開 repo 能不能用（查 add_repo 對公開 repo 的完整回覆）：公開 repo 只給匿名讀取，「register_repo_root 不涵蓋未附加的 repo」，要附加得用 access:"push" 並通過完整權限檢查。也就是公開 repo 拿不到 V2、LG 這兩場成功所靠的 repo 根目錄登記，跟 V3、V4 被擋的條件相同。結論：維持私人 repo。
+
 ### 各場模型對照（2026-10-29 整理）
 
 | 試跑 | 模型 | 確認有印內容 | 建任務清單 | 中途壓縮 |
