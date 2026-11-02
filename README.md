@@ -215,7 +215,13 @@ C 不比較：只看〔品牌〕自己
 - 有競品（A 推薦）版本從頭跑到尾，`analyze.py`、`build.js` 都沒被擋，17 頁（單位每件，03-2 不出）。
 - Commerce MCP 一開始又顯示要重新連線，客戶回「Use Tagtoo Commerce MCP for this」才恢復（V2 也發生過，非本工具問題）。
 - ⚠️ 沒照指示手抄：Claude 寫腳本讀 `/root/.claude/projects/` 底下的對話紀錄檔轉成 compact.json，`project-instructions.md` 明寫不要這樣做（v0.5.3 兩場都因此被擋）。這場沒被擋，但不保證下次。
-- 公開 repo 能不能用（查 add_repo 對公開 repo 的完整回覆）：公開 repo 只給匿名讀取，「register_repo_root 不涵蓋未附加的 repo」，要附加得用 access:"push" 並通過完整權限檢查。也就是公開 repo 拿不到 V2、LG 這兩場成功所靠的 repo 根目錄登記，跟 V3、V4 被擋的條件相同。結論：維持私人 repo。
+- 公開 repo 的 add_repo 回覆：只給匿名讀取、不附加到對話、不能 register_repo_root，但會給建議路徑 `/home/claude/tagtoo-wallace/tagtoo-commerce-report`。
+
+### 公開 repo＋照 add_repo 建議路徑 clone（2026-11-02 專案對話「馬玉山 杏仁粉」41b728f2，Sonnet 5.5）
+
+- repo 改回公開，「指示」欄不變（照 add_repo 回覆的路徑 clone）。add_repo 回 `read_available`，clone 到 `/home/claude/tagtoo-wallace/tagtoo-commerce-report`，沒有登記 repo 根目錄。
+- `analyze.py`、`npm install`、`build.js` 全程沒有任何被擋，產出 17 頁；也沒有去讀對話紀錄檔。
+- 結論：關鍵是 clone 到 add_repo 給的路徑，repo 是否附加、是否登記根目錄都不是必要條件。repo 維持公開，同事不必當協作者。只跑過這一場 ◀ 再觀察；同事帳號沒有 GitHub 連線時 add_repo 能否使用 ◀ 待確認（第一位同事試跑即知）。
 
 ### 各場模型對照（2026-10-29 整理）
 
