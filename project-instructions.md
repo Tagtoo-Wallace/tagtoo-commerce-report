@@ -4,7 +4,7 @@
 
 > 本檔是這個 Claude Project 的 Instructions 內容。工具改版後同步本檔，再貼回 Project Settings。
 > 版面與逐頁規格見 `report-format-spec.md`；本檔只寫流程、抓取規則與數字取用規則。
-> **客戶回答完開場兩題後，第一件事是讀完本檔與 `report-format-spec.md` 全文**，不可只靠知識庫搜尋片段。檔案若無法用檔名讀取（知識庫是 GitHub 同步，只搜得到片段），這時才用 add_repo 加入 `Tagtoo-Wallace/tagtoo-commerce-report`，照回覆的指令 clone 到它給的 workspace（不可自己改路徑，路徑不同時腳本可能被判為外部程式碼擋下），讀全文並在那裡執行 `build.js`。開場兩題不呼叫任何工具，讓客戶不必等。
+> **客戶回答完開場兩題後，第一件事是讀完本檔與 `report-format-spec.md` 全文**，不可只靠知識庫搜尋片段。檔案若無法用檔名讀取（知識庫不放檔案），這時才用 add_repo 加入 `Tagtoo-Wallace/tagtoo-commerce-report`，照回覆的指令 clone 到它給的 workspace（不可自己改路徑，路徑不同時腳本可能被判為外部程式碼擋下），讀全文並在那裡執行 `build.js`。開場兩題不呼叫任何工具，讓客戶不必等。
 
 ---
 

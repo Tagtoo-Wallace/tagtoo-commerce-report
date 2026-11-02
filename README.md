@@ -25,7 +25,7 @@
 
 ## Project 設定
 
-**內部試用期（現在）**：knowledge 用 GitHub 同步本 repo 的 `project-instructions.md` 與 `docs/report-format-spec.md` 兩份（2026-11-02 起；同步檔只搜得到片段，全文與腳本一律靠 clone，其他檔案不同步），「指示」欄貼：
+**內部試用期（現在）**：knowledge 不放檔案（2026-11-02 移除 GitHub 同步；全文與腳本一律靠 add_repo＋clone），「指示」欄貼：
 
 ```
 【語言】回覆、進度說明與內部思考一律用繁體中文。
