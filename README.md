@@ -25,7 +25,7 @@
 
 ## Project 設定
 
-**內部試用期（現在）**：knowledge 不放檔案（GitHub 同步的檔案讀不到全文，同事也不一定有 GitHub），「指示」欄貼：
+**內部試用期（現在）**：knowledge 用 GitHub 同步本 repo 的 `project-instructions.md` 與 `docs/report-format-spec.md` 兩份（2026-11-02 起；同步檔只搜得到片段，全文與腳本一律靠 clone，其他檔案不同步），「指示」欄貼：
 
 ```
 【語言】回覆、進度說明與內部思考一律用繁體中文。
@@ -189,6 +189,7 @@ C 不比較：只看〔品牌〕自己
 - 實測：claude.ai 新對話不用 add_repo、直接 `git clone` 本 repo 成功，Node v22 可用。第一次 Bash 被 auto mode 分類器擋下（沒給判定），原樣重送一次才跑，已寫進「指示」欄。
 - 測試用的是 Wallace 的帳號；同事帳號的網路設定是否相同 ◀ 待確認。
 - 專案知識庫已移除舊 repo 的 3 個 GitHub 同步來源，現在知識庫是空的，「指示」欄換成上方新版。
+- 之後 Wallace 加回本 repo 的 GitHub 同步（整個 repo 11 檔約 9.4 萬 token，含開發用 README 與推送腳本），同日縮成兩份規格文件（約 2.8 萬 token）。
 
 ### v0.7.0 試跑：馬玉山 杏仁粉、黑芝麻粉（2026-11-02「測試 - 馬玉山V2」，Sonnet 5.5）
 
