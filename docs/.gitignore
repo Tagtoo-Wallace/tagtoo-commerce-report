@@ -1,0 +1,12 @@
+# 產出簡報時留下的暫存檔，不進版控（沙盒偵測到未提交檔案會提醒，客戶會看到）
+*.pptx
+*.pdf
+deck_data.json
+package-lock.json
+node_modules/
+raw/
+items.json
+stats.json
+deck_parts.json
+brands.json
+__pycache__/

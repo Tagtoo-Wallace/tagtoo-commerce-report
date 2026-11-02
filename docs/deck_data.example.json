@@ -1,0 +1,163 @@
+{
+  "_comment": "測試用範例資料：品牌與數字皆為虛構，只用來驗證 build.js 版面，不可當成任何品牌的真實數據",
+  "client": "範例品牌",
+  "mode": "compare",
+  "fetched_at": "2026-10-28",
+  "category": "燕麥片",
+  "category_keywords": ["燕麥"],
+  "brand_primary_color": "873222",
+  "brands": [
+    { "name": "範例品牌", "is_client": true, "momo_tag": "EXAMPLE 範例品牌" },
+    { "name": "競品A", "is_client": false, "momo_tag": "競品A" },
+    { "name": "競品B", "is_client": false, "momo_tag": "競品B" },
+    { "name": "競品C", "is_client": false, "momo_tag": "競品C" }
+  ],
+  "page_titles": {
+    "01-1": "範例品牌三平台都有上架，momo 熱度最高",
+    "02-1": "競品C在 momo 查無自家商品，主力在蝦皮",
+    "02-2": "範例品牌在蝦皮多靠代購與連鎖通路販售",
+    "03-1": "範例品牌規格最齊全，組合包選擇最多",
+    "03-2": "範例品牌每克售價比競品中位數低兩成",
+    "03-3": "同一商品在 momo 最便宜的比例最高",
+    "03-4": "競品A折扣最深，平均打七五折",
+    "04-1": "momo 前段商品多為範例品牌的組合包",
+    "04-2": "範例品牌有兩項商品達 10 萬件以上級距",
+    "05-1": "各品牌標題都強調認證，範例品牌多談組合",
+    "05-2": "範例品牌靠 momo 組合包取得領先",
+    "05-3": "建議補強蝦皮官方賣場與單件規格",
+    "A-1": "研究範圍與資料說明",
+    "A-2": "本報告引用的商品"
+  },
+  "page_sources": { "05-1": "依商品標題文字歸納｜momo 搜尋結果" },
+  "summary_kpis": [
+    { "label": "有上架的平台", "value": "3／3", "sub": "momo、PChome、蝦皮都有自家商品" },
+    { "label": "每克售價中位數", "value": "0.5 元", "sub": "競品中位數 0.6 元" },
+    { "label": "momo 最高銷量級距", "value": "30 萬件以上", "sub": "累計、第三方估計" }
+  ],
+  "summary_findings": [
+    "範例品牌在 momo 的銷量級距與評論數都領先三個競品",
+    "以每克售價比較，範例品牌比競品中位數低約兩成",
+    "蝦皮上範例品牌多由代購與連鎖通路販售，官方賣場商品少"
+  ],
+  "channel_matrix": { "rows": [
+    { "brand": "範例品牌", "platform": "momo", "sampled": 50, "kept": 18, "removed": 32, "resale": 0, "is_client": true },
+    { "brand": "範例品牌", "platform": "pchome", "sampled": 50, "kept": 12, "removed": 38, "resale": 0, "is_client": true },
+    { "brand": "範例品牌", "platform": "shopee", "sampled": 30, "kept": 21, "removed": 9, "resale": 0, "is_client": true },
+    { "brand": "競品A", "platform": "momo", "sampled": 50, "kept": 9, "removed": 41, "resale": 0 },
+    { "brand": "競品A", "platform": "pchome", "sampled": 50, "kept": 5, "removed": 45, "resale": 0 },
+    { "brand": "競品A", "platform": "shopee", "sampled": 30, "kept": 14, "removed": 16, "resale": 0 },
+    { "brand": "競品B", "platform": "momo", "sampled": 50, "kept": 7, "removed": 43, "resale": 0 },
+    { "brand": "競品B", "platform": "pchome", "sampled": 50, "kept": 0, "removed": 50, "resale": 0 },
+    { "brand": "競品B", "platform": "shopee", "sampled": 30, "kept": 11, "removed": 19, "resale": 0 },
+    { "brand": "競品C", "platform": "momo", "sampled": 50, "kept": 0, "removed": 50, "resale": 0 },
+    { "brand": "競品C", "platform": "pchome", "sampled": 50, "kept": 3, "removed": 47, "resale": 0 },
+    { "brand": "競品C", "platform": "shopee", "sampled": 30, "kept": 19, "removed": 11, "resale": 0 }
+  ] },
+  "shopee_sellers": { "rows": [
+    { "brand": "範例品牌", "seller_type": "官方賣場", "shop_count": 1 },
+    { "brand": "範例品牌", "seller_type": "連鎖通路", "shop_count": 3 },
+    { "brand": "範例品牌", "seller_type": "代購", "shop_count": 6 },
+    { "brand": "範例品牌", "seller_type": "一般賣家", "shop_count": 4 },
+    { "brand": "競品A", "seller_type": "官方賣場", "shop_count": 1 },
+    { "brand": "競品A", "seller_type": "代購", "shop_count": 2 },
+    { "brand": "競品A", "seller_type": "一般賣家", "shop_count": 5 },
+    { "brand": "競品B", "seller_type": "連鎖通路", "shop_count": 2 },
+    { "brand": "競品B", "seller_type": "一般賣家", "shop_count": 6 },
+    { "brand": "競品C", "seller_type": "官方賣場", "shop_count": 1 },
+    { "brand": "競品C", "seller_type": "一般賣家", "shop_count": 3 }
+  ] },
+  "assortment": { "rows": [
+    { "brand": "範例品牌", "line": "即沖即食燕麥片", "spec": "800g 單罐、800g×3 罐", "price_min": 119 },
+    { "brand": "範例品牌", "line": "嚴選薄片燕麥片", "spec": "1200g×2 盒、×4 盒", "price_min": 330 },
+    { "brand": "範例品牌", "line": "高蛋白燕麥片", "spec": "680g×4 袋箱購", "price_min": 799 },
+    { "brand": "競品A", "line": "有機燕麥片", "spec": "500g 單包、×3 包", "price_min": 189 },
+    { "brand": "競品B", "line": "即食燕麥奶粉", "spec": "30g×20 包", "price_min": 299 },
+    { "brand": "競品C", "line": "燕麥穀物棒", "spec": "25g×12 入", "price_min": 249 }
+  ] },
+  "unit_price": { "unit": "每克", "market_median": null, "rows": [
+    { "label": "範例品牌", "n": 22, "median": 0.48, "by_platform": { "momo": 10, "pchome": 6, "shopee": 6 }, "is_client": true },
+    { "label": "競品A", "n": 11, "median": 0.62, "by_platform": { "momo": 5, "pchome": 2, "shopee": 4 } },
+    { "label": "競品B", "n": 9, "median": 0.55, "by_platform": { "momo": 4, "pchome": 2, "shopee": 3 } },
+    { "label": "競品C", "n": 8, "median": 0.83, "by_platform": { "momo": 0, "pchome": 3, "shopee": 5 } }
+  ] },
+  "price_compare": { "rows": [
+    { "item": "範例品牌 即沖燕麥 800g", "momo": 119, "pchome": 119, "shopee": 119 },
+    { "item": "範例品牌 薄片燕麥 1200g×2", "momo": 340, "pchome": 330, "shopee": 299 },
+    { "item": "競品A 有機燕麥 500g", "momo": 189, "pchome": null, "shopee": 199 },
+    { "item": "競品B 燕麥奶粉 30g×20", "momo": 299, "pchome": 310, "shopee": 285 },
+    { "item": "競品C 穀物棒 25g×12", "momo": null, "pchome": 249, "shopee": 239 }
+  ] },
+  "discount": { "rows": [
+    { "brand": "範例品牌", "n_discounted": 14, "n_total": 51, "avg_pct": 18 },
+    { "brand": "競品A", "n_discounted": 8, "n_total": 28, "avg_pct": 25 },
+    { "brand": "競品B", "n_discounted": 5, "n_total": 18, "avg_pct": 12 },
+    { "brand": "競品C", "n_discounted": 3, "n_total": 22, "avg_pct": 9 }
+  ] },
+  "momo_top": { "rows": [
+    { "rank": 1, "brand": "範例品牌", "title": "【範例品牌】原片原味大燕麥片800gx3罐", "price": 375, "sold_band": "30 萬件以上", "rating": 4.9, "review_count": 1346, "url": "https://www.momoshop.com.tw/product/1000001" },
+    { "rank": 2, "brand": "範例品牌", "title": "【範例品牌】即沖即食大燕麥片800gx3罐", "price": 345, "sold_band": "20 萬件以上", "rating": 4.9, "review_count": 1463, "url": "https://www.momoshop.com.tw/product/1000002" },
+    { "rank": 3, "brand": "範例品牌", "title": "【範例品牌】即沖即食大燕麥片800gx1罐", "price": 119, "sold_band": "5 萬件以上", "rating": 4.9, "review_count": 2151, "url": "https://www.momoshop.com.tw/product/1000003" },
+    { "rank": 4, "brand": "競品A", "title": "【競品A】有機燕麥片500g(3入組)", "price": 499, "sold_band": "1 萬件以上", "rating": 4.8, "review_count": 612, "url": "https://www.momoshop.com.tw/product/1000004" },
+    { "rank": 5, "brand": "競品B", "title": "【競品B】即食燕麥奶粉30gx20包", "price": 299, "sold_band": "1 千件以上", "rating": 4.7, "review_count": 204, "url": "https://www.momoshop.com.tw/product/1000005" },
+    { "rank": 6, "brand": "競品A", "title": "【競品A】有機燕麥片500g", "price": 189, "sold_band": "1 千件以上", "rating": 4.8, "review_count": 188, "url": "https://www.momoshop.com.tw/product/1000006" }
+  ] },
+  "sold_band": { "tiers": ["未顯示級距", "未達 1 千件", "1 千件以上", "1 萬件以上", "10 萬件以上"], "rows": [
+    { "brand": "範例品牌", "tier": "未顯示級距", "count": 2 },
+    { "brand": "範例品牌", "tier": "未達 1 千件", "count": 2 },
+    { "brand": "範例品牌", "tier": "1 千件以上", "count": 6 },
+    { "brand": "範例品牌", "tier": "1 萬件以上", "count": 6 },
+    { "brand": "範例品牌", "tier": "10 萬件以上", "count": 2 },
+    { "brand": "競品A", "tier": "未顯示級距", "count": 2 },
+    { "brand": "競品A", "tier": "未達 1 千件", "count": 1 },
+    { "brand": "競品A", "tier": "1 千件以上", "count": 4 },
+    { "brand": "競品A", "tier": "1 萬件以上", "count": 2 },
+    { "brand": "競品B", "tier": "未顯示級距", "count": 2 },
+    { "brand": "競品B", "tier": "未達 1 千件", "count": 2 },
+    { "brand": "競品B", "tier": "1 千件以上", "count": 3 }
+  ] },
+  "review_quotes": { "sample_size": null, "rows": [] },
+  "title_claims": { "rows": [
+    { "claim": "健康認證", "brand": "範例品牌", "count": 14, "example": "國家健康食品雙效認證" },
+    { "claim": "組合優惠", "brand": "範例品牌", "count": 11, "example": "買2送2共4盒" },
+    { "claim": "有機", "brand": "競品A", "count": 9, "example": "有機燕麥片500g" },
+    { "claim": "隨身包", "brand": "競品B", "count": 7, "example": "即食燕麥奶粉30gx20包" },
+    { "claim": "高蛋白", "brand": "範例品牌", "count": 4, "example": "高蛋白高纖大燕麥片" },
+    { "claim": "零嘴點心", "brand": "競品C", "count": 6, "example": "燕麥穀物棒25gx12入" }
+  ] },
+  "insights": [
+    { "title": "momo 是範例品牌的主戰場", "body": "momo 前六名商品有三項是範例品牌，銷量級距與評論數都明顯高於競品", "evidence": "見 04-1、04-2" },
+    { "title": "價格優勢來自大容量組合包", "body": "範例品牌每克售價最低，主要是 800g×3 罐、買 2 送 2 等組合包拉低單價", "evidence": "見 03-1、03-2" },
+    { "title": "蝦皮通路掌控度較低", "body": "蝦皮上的範例品牌商品多由代購與連鎖通路販售，價格與包裝品質可能較難一致", "evidence": "見 02-2" }
+  ],
+  "actions": [
+    { "title": "強化蝦皮官方賣場", "body": "把 momo 熱賣的組合包同步上架蝦皮官方賣場，減少代購價差造成的比價混亂" },
+    { "title": "針對包裝客訴改善出貨", "body": "評論提到罐子運送凹痕，可評估加強外箱緩衝，降低送禮情境的負評" },
+    { "title": "補單件小規格搶首購", "body": "競品以小包裝與隨身包切入，可推出小容量試吃組降低首次購買門檻" }
+  ],
+  "scope_items": [
+    "研究品牌：範例品牌；比較競品：競品A、競品B、競品C",
+    "搜尋字：「品牌名 燕麥」，台灣市場",
+    "抽樣：momo、PChome 各搜尋前 50 筆，蝦皮前 30 筆；剔除非該品牌商品，第三方轉賣保留在通路頁",
+    "比價單位：每克，依商品標題容量換算",
+    "資料擷取日：2026-10-28"
+  ],
+  "appendix_notes": [
+    "所有數字為擷取當下的公開頁面，沒有時間軸，不代表期間銷量",
+    "momo 銷量為平台顯示的累計級距，屬第三方估計",
+    "價格頁只計正規通路（品牌官方、平台自營、連鎖通路），不含第三方轉賣",
+    "每單位售價依標題容量換算，換算不出的商品不列入",
+    "蝦皮評論本次未取得；蝦皮評論數與商品評分不引用"
+  ],
+  "appendix_products": { "rows": [
+    { "idx": 1, "brand": "範例品牌", "platform": "momo", "title": "【範例品牌】原片原味大燕麥片800gx3罐", "price": 375, "sold_band": "30 萬件以上", "url": "https://www.momoshop.com.tw/product/1000001" },
+    { "idx": 2, "brand": "範例品牌", "platform": "momo", "title": "【範例品牌】即沖即食大燕麥片800gx3罐", "price": 345, "sold_band": "20 萬件以上", "url": "https://www.momoshop.com.tw/product/1000002" },
+    { "idx": 3, "brand": "範例品牌", "platform": "momo", "title": "【範例品牌】即沖即食大燕麥片800gx1罐", "price": 119, "sold_band": "5 萬件以上", "url": "https://www.momoshop.com.tw/product/1000003" },
+    { "idx": 4, "brand": "範例品牌", "platform": "pchome", "title": "嚴選薄片大燕麥片(1200g)x2盒", "price": 330, "sold_band": null, "url": "https://24h.pchome.com.tw/prod/DXXX00-A90000004" },
+    { "idx": 5, "brand": "範例品牌", "platform": "shopee", "title": "範例品牌 大燕麥片嚴選薄片 1200G 2入組", "price": 299, "sold_band": null, "url": "https://shopee.tw/product/10000000/20000005" },
+    { "idx": 6, "brand": "競品A", "platform": "momo", "title": "【競品A】有機燕麥片500g(3入組)", "price": 499, "sold_band": "1 萬件以上", "url": "https://www.momoshop.com.tw/product/1000006" },
+    { "idx": 7, "brand": "競品A", "platform": "momo", "title": "【競品A】有機燕麥片500g", "price": 189, "sold_band": "1 千件以上", "url": "https://www.momoshop.com.tw/product/1000007" },
+    { "idx": 8, "brand": "競品B", "platform": "momo", "title": "【競品B】即食燕麥奶粉30gx20包", "price": 299, "sold_band": "1 千件以上", "url": "https://www.momoshop.com.tw/product/1000008" },
+    { "idx": 9, "brand": "競品B", "platform": "shopee", "title": "競品B 燕麥奶粉 30g 20包 隨身包", "price": 285, "sold_band": null, "url": "https://shopee.tw/product/10000000/20000009" },
+    { "idx": 10, "brand": "競品C", "platform": "pchome", "title": "燕麥穀物棒25g x12入", "price": 249, "sold_band": null, "url": "https://24h.pchome.com.tw/prod/DXXX00-A900000010" }
+  ] }
+}

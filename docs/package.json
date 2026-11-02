@@ -1,0 +1,12 @@
+{
+  "name": "tagtoo-commerce-report",
+  "private": true,
+  "description": "電商品牌分析報告產生器",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "pptxgenjs": "4.0.1"
+  },
+  "scripts": {
+    "demo": "node build.js --input deck_data.example.json --output demo.pptx"
+  }
+}
