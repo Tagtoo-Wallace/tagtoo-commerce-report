@@ -19,6 +19,7 @@
 | `docs/tagtoo_pptx.js` | knowledge | 取自 `upstream/seo-geo`（與塔圖簡報規範資料夾同一版，中文用微軟正黑體） |
 | `docs/tagtoo_assets.js` | knowledge | 取自 `upstream/kol-recommendation`：seo-geo 與 ad-report 的 logo base64 長度不對，PptxGenJS 一載入就報錯 |
 | `docs/package.json` | knowledge | 固定 `pptxgenjs` 4.0.1 |
+| `scripts/push.sh` | 不上傳 | 以 Tagtoo-Wallace 推送本 repo，結束切回原帳號 |
 
 本檔（README）不上傳到 Project。
 
