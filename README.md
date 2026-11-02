@@ -207,6 +207,8 @@ C 不比較：只看〔品牌〕自己
 - 「測試 - 馬玉山V4」（公開 repo＋add_repo）仍被擋；改回私人 repo 後重跑（對話「馬玉山 杏仁粉」），add_repo 回覆「已加入」並給 workspace `/home/claude/tagtoo-commerce-report`，`analyze.py` 還是被擋。
 - 比對 add_repo 回覆：它會登記 workspace 路徑，並要求 clone 到那裡。V2 以前照它的路徑 clone，都沒被擋；v0.7.1 起「指示」欄把路徑改成 `/home/claude/tcr`，V3、V4 與這場都被擋。推論：腳本在登記的 workspace 外才被判為外部程式碼 ◀ 待確認（下一場實跑驗證）。
 - v0.7.4：repo 維持私人；「指示」欄改成照 add_repo 回覆的 workspace clone、不可改路徑，拿掉直接 clone 的備案（私人 repo 沒有權限也 clone 不到）。
+- v0.7.4 實跑（專案對話「馬玉山 杏仁粉」，19db86d8）：add_repo 加入後 clone 到 `/home/claude/tagtoo-commerce-report` 並呼叫 `register_repo_root`；`analyze.py`、`build.js` 全程沒有任何被擋，產出 17 頁簡報。02-2 蝦皮賣家：連鎖與平台直營 3、代購 2、一般賣家 13，開南食品官方旗艦店不再算官方。路徑推論與結果一致，但目前只有這一場成功 ◀ 再跑幾場確認。
+- 小問題：同版本另一場（ae30b965，未跑完）開場回覆多了一句內部說明「客戶第一句已附品牌與產品…跳過第一題」，客戶看得到。
 
 ### 各場模型對照（2026-10-29 整理）
 
