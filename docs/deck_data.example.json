@@ -15,7 +15,7 @@
   "page_titles": {
     "01-1": "範例品牌三平台都有上架，momo 熱度最高",
     "02-1": "競品C在 momo 查無自家商品，主力在蝦皮",
-    "02-2": "範例品牌在蝦皮多靠代購與連鎖通路販售",
+    "02-2": "範例品牌在蝦皮多靠代購與連鎖、平台直營販售",
     "03-1": "範例品牌規格最齊全，組合包選擇最多",
     "03-2": "範例品牌每克售價比競品中位數低兩成",
     "03-3": "同一商品在 momo 最便宜的比例最高",
@@ -37,7 +37,7 @@
   "summary_findings": [
     "範例品牌在 momo 的銷量級距與評論數都領先三個競品",
     "以每克售價比較，範例品牌比競品中位數低約兩成",
-    "蝦皮上範例品牌多由代購與連鎖通路販售，官方賣場商品少"
+    "蝦皮上範例品牌多由代購與連鎖、平台直營販售，官方賣場商品少"
   ],
   "channel_matrix": { "rows": [
     { "brand": "範例品牌", "platform": "momo", "sampled": 50, "kept": 18, "removed": 32, "resale": 0, "is_client": true },
@@ -55,13 +55,13 @@
   ] },
   "shopee_sellers": { "rows": [
     { "brand": "範例品牌", "seller_type": "官方賣場", "shop_count": 1 },
-    { "brand": "範例品牌", "seller_type": "連鎖通路", "shop_count": 3 },
+    { "brand": "範例品牌", "seller_type": "連鎖與平台直營", "shop_count": 3 },
     { "brand": "範例品牌", "seller_type": "代購", "shop_count": 6 },
     { "brand": "範例品牌", "seller_type": "一般賣家", "shop_count": 4 },
     { "brand": "競品A", "seller_type": "官方賣場", "shop_count": 1 },
     { "brand": "競品A", "seller_type": "代購", "shop_count": 2 },
     { "brand": "競品A", "seller_type": "一般賣家", "shop_count": 5 },
-    { "brand": "競品B", "seller_type": "連鎖通路", "shop_count": 2 },
+    { "brand": "競品B", "seller_type": "連鎖與平台直營", "shop_count": 2 },
     { "brand": "競品B", "seller_type": "一般賣家", "shop_count": 6 },
     { "brand": "競品C", "seller_type": "官方賣場", "shop_count": 1 },
     { "brand": "競品C", "seller_type": "一般賣家", "shop_count": 3 }
@@ -127,7 +127,7 @@
   "insights": [
     { "title": "momo 是範例品牌的主戰場", "body": "momo 前六名商品有三項是範例品牌，銷量級距與評論數都明顯高於競品", "evidence": "見 04-1、04-2" },
     { "title": "價格優勢來自大容量組合包", "body": "範例品牌每克售價最低，主要是 800g×3 罐、買 2 送 2 等組合包拉低單價", "evidence": "見 03-1、03-2" },
-    { "title": "蝦皮通路掌控度較低", "body": "蝦皮上的範例品牌商品多由代購與連鎖通路販售，價格與包裝品質可能較難一致", "evidence": "見 02-2" }
+    { "title": "蝦皮通路掌控度較低", "body": "蝦皮上的範例品牌商品多由代購與連鎖、平台直營販售，價格與包裝品質可能較難一致", "evidence": "見 02-2" }
   ],
   "actions": [
     { "title": "強化蝦皮官方賣場", "body": "把 momo 熱賣的組合包同步上架蝦皮官方賣場，減少代購價差造成的比價混亂" },

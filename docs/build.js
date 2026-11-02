@@ -33,7 +33,7 @@ const SELLER_COLORS = ["873222", "2A78D6", "A86F00", "167F5A"];
 const BAND_COLORS = ["6E6E6E", "D97A62", "A8432F", "74220F", "3A0C06"];
 const DEFAULT_TIERS = ["未顯示級距", "未達 1 千件", "1 千件以上", "1 萬件以上", "10 萬件以上"];
 const TITLE_MAX = 24, MAX_COLS = 5;
-const SELLER_TYPES = ["官方賣場", "連鎖通路", "代購", "一般賣家"];
+const SELLER_TYPES = ["官方賣場", "連鎖與平台直營", "代購", "一般賣家"];
 const PLATFORMS = ["momo", "pchome", "shopee"];
 const PLATFORM_LABEL = { momo: "momo", pchome: "PChome", shopee: "蝦皮" };
 
@@ -382,7 +382,7 @@ function pMatrix(ctx) {
 }
 
 function pSellers(ctx) {
-  const s = slideOf({ ...ctx, ds: DS(ctx, `依賣場名稱與網址文字歸類；同一賣場算一個賣家｜蝦皮搜尋前 ${sampleOf("shopee")} 筆`) });
+  const s = slideOf({ ...ctx, ds: DS(ctx, `依賣場名稱歸類；同一賣場算一個賣家｜蝦皮搜尋前 ${sampleOf("shopee")} 筆`) });
   stackedByBrand(s, D.sellers, "seller_type", SELLER_TYPES, "shop_count", SELLER_COLORS);
   // momo、PChome 沒有可分四類的賣家資料，改列第三方轉賣筆數（analyze.py 的 channel_matrix.resale）
   if (D.matrix.some((r) => "resale" in r)) {

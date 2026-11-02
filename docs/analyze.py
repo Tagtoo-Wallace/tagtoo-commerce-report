@@ -40,7 +40,7 @@ import argparse, json, os, re, statistics as st, sys
 
 PLATFORMS = ("momo", "pchome", "shopee")
 TIERS = ["未顯示級距", "未達 1 千件", "1 千件以上", "1 萬件以上", "10 萬件以上"]
-SELLER_TYPES = ["官方賣場", "連鎖通路", "代購", "一般賣家"]
+SELLER_TYPES = ["官方賣場", "連鎖與平台直營", "代購", "一般賣家"]
 CHAINS = ("康是美", "屈臣氏", "Watsons", "watsons", "寶雅", "POYA", "家樂福", "全聯", "愛買", "大潤發", "萬家福",
           "樂家康", "日藥本舖", "松本清", "美廉社", "躍獅", "大樹藥局", "丁丁藥局", "杏一", "燦坤", "全國電子",
           "順發", "誠品", "博客來", "Costco 官方")
@@ -153,16 +153,19 @@ def unit_qty(title, unit, g_ml_same=False):
 
 
 # ── 通路分類 ──────────────────────────────────────────────────────────────────
-def seller_type(p):
+# 官方賣場只認賣場名含該品牌名稱或關鍵字的店；店名有「官方」「旗艦」但不含品牌名的是經銷商或第三方，
+# 品牌自營店也常不寫「官方」（例：御復珍 ufood、耕沅GengYuanOil）（2026-11-02 馬玉山V2 實測）。
+# 蝦皮直營是平台自營，屬授權通路，跟連鎖通路同一類。
+def seller_type(p, b):
     name = (p.get("shop") or {}).get("name") or ""
-    url = p.get("url") or ""
-    text = name + " " + url
-    if re.search(r"官方|旗艦|直營", text) or "蝦皮直營" in text:
+    if "蝦皮直營" in name:
+        return "連鎖與平台直營"
+    if any(w in name for w in PROXY):
+        return "代購"
+    if has_any(name, b["keywords"] + [b["name"]]):
         return "官方賣場"
     if any(c in name for c in CHAINS):
-        return "連鎖通路"
-    if any(w in text for w in PROXY):
-        return "代購"
+        return "連鎖與平台直營"
     return "一般賣家"
 
 
@@ -188,8 +191,8 @@ def classify(platform, p, b):
         return False, None, None
     # shopee：標題或網址含品牌名
     if has_any(title + " " + (p.get("url") or ""), b["keywords"] + [b["name"]]):
-        stype = seller_type(p)
-        return True, ("正規" if stype in ("官方賣場", "連鎖通路") else "轉賣"), stype
+        stype = seller_type(p, b)
+        return True, ("正規" if stype in ("官方賣場", "連鎖與平台直營") else "轉賣"), stype
     return False, None, None
 
 
