@@ -1,6 +1,6 @@
 # tagtoo-commerce-report：電商品牌分析報告（草稿）
 
-> 狀態：草稿 v0.7.5（2026-11-02；流程已穩定，簡報內容調整中；精簡版 5 章 14–17 頁，A-2 可續頁）。這是 Wallace 新建的工具，不是既有的上游包，也不是客戶客製版。原本放在 `tagtoo-harness-packages` 的 `drafts/commerce-report/`，2026-11-02 獨立成本公開 repo 並定為正本：同事內部試用時直接 clone，不必有 GitHub 帳號。
+> 狀態：草稿 v0.8.0（2026-11-03；程式改由專案檔案 `tcr-pkg.xlsx` 提供；流程已穩定，簡報內容調整中；精簡版 5 章 14–17 頁，A-2 可續頁）。這是 Wallace 新建的工具，不是既有的上游包，也不是客戶客製版。原本放在 `tagtoo-harness-packages` 的 `drafts/commerce-report/`，2026-11-02 獨立成本公開 repo 並定為正本：同事內部試用時直接 clone，不必有 GitHub 帳號。
 >
 > **用途**：給業務推廣、品牌客戶自己使用。設計前提是互動越少越好：客戶只回覆兩次（確認品牌與競品、確認摘要結論），不交草稿、不產 Excel。
 
@@ -10,22 +10,24 @@
 
 | 檔案 | 上傳到哪 | 狀態 |
 |---|---|---|
-| `project-instructions.md` | knowledge（「指示」欄文字見下方） | v0.7.5 |
+| `project-instructions.md` | knowledge（「指示」欄文字見下方） | v0.8.0 |
 | `docs/report-format-spec.md` | knowledge | v0.8.1 |
-| `docs/analyze.py` | knowledge | v0.5.3 新增：品牌比對、通路分類與統計。v0.5.4：讀手抄精簡格式、容量差距判斷、轉賣比例。v0.5.6：產出摘要骨架 `summary_draft.md`、組合包容量加總、液體克毫升同視（`g_ml_same`）、品牌對照表兩種寫法。v0.6.0：產出跨平台比價（自動配對）、引用商品清單、商品頁網址、上架平台指標、各平台轉賣筆數。v0.7.0：只計同品類商品（`category_keywords`）、外層件數解析修正、每單位售價各平台筆數。v0.7.2：蝦皮官方賣場改為賣場名含品牌名才算，蝦皮直營併入「連鎖與平台直營」。（v0.5.3 的 `collect_raw.py` 讀對話紀錄檔，兩場都被安全檢查擋下，v0.5.5 刪除） |
+| `docs/analyze.py` | 包進 `dist/tcr-pkg.xlsx` | v0.5.3 新增：品牌比對、通路分類與統計。v0.5.4：讀手抄精簡格式、容量差距判斷、轉賣比例。v0.5.6：產出摘要骨架 `summary_draft.md`、組合包容量加總、液體克毫升同視（`g_ml_same`）、品牌對照表兩種寫法。v0.6.0：產出跨平台比價（自動配對）、引用商品清單、商品頁網址、上架平台指標、各平台轉賣筆數。v0.7.0：只計同品類商品（`category_keywords`）、外層件數解析修正、每單位售價各平台筆數。v0.7.2：蝦皮官方賣場改為賣場名含品牌名才算，蝦皮直營併入「連鎖與平台直營」。（v0.5.3 的 `collect_raw.py` 讀對話紀錄檔，兩場都被安全檢查擋下，v0.5.5 刪除） |
 | `docs/.gitignore` | 不上傳 | 測試期用：產簡報的暫存檔不進版控，避免沙盒提醒未提交檔案 |
-| `docs/build.js` | knowledge | 已完成，2026-10-28 用範例資料實測（見下）。v0.6.0：封面標語、商品名完整列出加連結、A-2 續頁、02-2／04-2 配色、02-1／03-4 固定頁尾。v0.7.0：封面寫分析品項與比較品牌、03-2 與 03-4 在各品牌下方標件數、03-4 改直條 |
-| `docs/deck_data.example.json` | knowledge | 虛構資料的完整範例 |
-| `docs/tagtoo_pptx.js` | knowledge | 取自 `upstream/seo-geo`（與塔圖簡報規範資料夾同一版，中文用微軟正黑體） |
-| `docs/tagtoo_assets.js` | knowledge | 取自 `upstream/kol-recommendation`：seo-geo 與 ad-report 的 logo base64 長度不對，PptxGenJS 一載入就報錯 |
-| `docs/package.json` | knowledge | 固定 `pptxgenjs` 4.0.1 |
+| `docs/build.js` | 包進 `dist/tcr-pkg.xlsx` | 已完成，2026-10-28 用範例資料實測（見下）。v0.6.0：封面標語、商品名完整列出加連結、A-2 續頁、02-2／04-2 配色、02-1／03-4 固定頁尾。v0.7.0：封面寫分析品項與比較品牌、03-2 與 03-4 在各品牌下方標件數、03-4 改直條 |
+| `docs/deck_data.example.json` | 包進 `dist/tcr-pkg.xlsx` | 虛構資料的完整範例 |
+| `docs/tagtoo_pptx.js` | 包進 `dist/tcr-pkg.xlsx` | 取自 `upstream/seo-geo`（與塔圖簡報規範資料夾同一版，中文用微軟正黑體） |
+| `docs/tagtoo_assets.js` | 包進 `dist/tcr-pkg.xlsx` | 取自 `upstream/kol-recommendation`：seo-geo 與 ad-report 的 logo base64 長度不對，PptxGenJS 一載入就報錯 |
+| `docs/package.json` | 包進 `dist/tcr-pkg.xlsx` | 固定 `pptxgenjs` 4.0.1 |
+| `scripts/build_pkg.py` | 不上傳 | 產生 `dist/tcr-pkg.xlsx`：改了 `docs/` 的程式就重跑、commit，再把 xlsx 換上專案。固定時間戳，同內容產出同一個檔 |
+| `dist/tcr-pkg.xlsx` | 專案檔案 | 程式包：合法的最小試算表，`tcr/docs/` 底下放 6 個原檔與 `PKG_VERSION`。知識庫的文字檔不會出現在執行環境的磁碟上，試算表會原檔放進 `/mnt/user-data/attachments/`，解壓即得原檔 |
 | `scripts/push.sh` | 不上傳 | 以 Tagtoo-Wallace 推送本 repo，結束切回原帳號 |
 
 本檔（README）不上傳到 Project。
 
 ## Project 設定
 
-**內部試用期（現在）**：knowledge 不放檔案（2026-11-02 移除 GitHub 同步；全文與腳本一律靠 add_repo＋clone），「指示」欄貼：
+**v0.8.0 起（先在測試專案「Commerce Report 上傳版測試」驗證）**：專案檔案放 3 個：`dist/tcr-pkg.xlsx`、`project-instructions.md`、`docs/report-format-spec.md`；「指示」欄貼：
 
 ```
 【語言】回覆、進度說明與內部思考一律用繁體中文。
@@ -47,12 +49,12 @@ B 我自己指定：最多 3 個，直接接著打品牌名，例：B 虎牌、�
 C 不比較：只看〔品牌〕自己
 客戶第一句已附品牌或競品時，跳過已回答的那題。
 
-【之後】客戶回答完上面兩題，才先用加入 repo 的工具（add_repo）加入 GitHub 的 Tagtoo-Wallace/tagtoo-commerce-report，再照它回覆的指令 clone，路徑用它回覆的 workspace，不可自己改路徑（被安全檢查擋下且沒有給判定時，原樣重送一次），讀完該資料夾的 project-instructions.md 與 docs/report-format-spec.md 全文，依 project-instructions.md 從步驟 ③ 繼續；build.js 也在該資料夾執行。不可只靠知識庫搜尋片段。回覆中不提 clone、檔名或指令。
+【之後】客戶回答完上面兩題，才用讀知識庫的工具（Projects，method project_read）讀完 project-instructions.md 與 report-format-spec.md 全文（不可只靠知識庫搜尋片段），再照 project-instructions.md「程式包」段把專案檔案 tcr-pkg.xlsx 解壓到 /home/claude/pkg/docs（不讀程式原始碼、不自己重打程式；第一個指令沒有給判定時，原樣重送一次），依 project-instructions.md 從步驟 ③ 繼續。回覆中不提解壓、檔名或指令。
 ```
 
 【全程】三條寫在「指示」欄，是因為好神拖那場的任務清單在讀檔之前就建了，寫在檔案裡的規則管不到；確認表沒印、英文進度句也是檔案裡寫了仍發生，「指示」欄每一輪都會讀到、對話被壓縮也不會掉。
 
-開場兩題寫在「指示」欄，是因為 Claude 讀到這兩題時還沒 clone、讀不到 `project-instructions.md`；放在這裡，開場就不用先等 20–30 秒的 clone。
+開場兩題寫在「指示」欄，是因為「指示」欄每一輪都直接放在 Claude 眼前，不用先讀檔；開場兩題不呼叫任何工具，回覆最快。v0.7.x 的 GitHub 版（add_repo＋clone）留在 git 歷史，BD 共用帳號跑 clone 下來的腳本會被擋，所以改成上傳版。
 
 原因：GitHub 同步的檔案在 Project 裡**不能用檔名讀全文**，只能被搜尋到片段（2026-10-28 實測）。這次試跑前四輪都只靠片段在跑流程，到產 PPTX 時才自己 clone repo 拿到全文。
 
