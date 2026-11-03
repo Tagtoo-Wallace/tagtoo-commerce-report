@@ -309,6 +309,15 @@ B 的例子用你已知、和〔品牌〕同品類的兩個台灣常見品牌（
 - v0.8.4：`project-instructions.md`「產出前 QA 關卡」補一行固定縮圖指令：`mktemp -d` 每次開新資料夾、`soffice` 轉 PDF、`pdftoppm` 出 50 dpi 縮圖、PIL 拼成 4 欄 `sheet.png`，不含 `rm`，並寫明不可用 `rm`、不可自行改寫。三個工具與 PIL 都是這場執行環境實際用過的。本機用範例資料（17 頁）照抄指令跑兩次，兩次都產出 `sheet.png`、各開一個新資料夾；claude.ai 環境的安全檢查是否放行這行 ◀ 待確認。程式只換 `PKG_VERSION`，`analyze.py`、`build.js` 沒動。
 - 英文進度句這場至少 6 句（例 `Setting up collection for the Zojirushi thermos search.`），沒看到日文與簡體。
 
+### v0.8.4 試跑：白蘭氏雞精 vs 桂格（2026-11-03，正式專案對話「白蘭氏雞精與桂格比較」8f826d22，BD 共用帳號，Sonnet 5.5，18 頁）
+
+- 第一句直接送「白蘭氏－雞精，B 桂格」，跳過開場兩題。第一輪 `PKG_VERSION` 0.8.4（解壓重送一次），但 Commerce MCP 授權已失效，Claude 找不到 momo 工具，回「請稍後回『重試』」。BD 帳號連接器頁 Tagtoo Commerce、Social、Meta 等自訂連接器都顯示「重新連接」，距同帳號象印那場成功約 40 分鐘。Wallace 重連後回「重試」，接續出確認表（待問維護方第 6 題的又一筆證據）。
+- 組合包規則在 claude.ai 實際觸發：`analyze.py` 把 momo 與 PChome 兩筆「健康滿貫禮8入禮盒(雞精68ml*3入+葉黃素飲60ml*2入+燕窩42g*3入)」判為「組合含其他單位，無法判斷」，不進每毫升中位數。白蘭氏 42 筆可換算、11 筆換算不出；桂格 49 筆、4 筆。Claude 之後把 8 筆換算不出的商品寫進 `unit_overrides`，重跑加 `--lock` 後中位數與筆數不變（0.99、0.73）。和 v0.8.2 那場（0.90、0.70）樣本不同，不能直接歸因於規則。
+- 鎖定：步驟 ④ 最後一步「鎖定數字並產生摘要草稿」，步驟 ⑤ 沒有重跑分析。
+- 縮圖：步驟 ⑤ 用了 v0.8.4 的固定指令（省掉開頭的 `cd`，其餘照抄），一次就過，回「18 頁 …/sheet.png」，沒有任何「失敗」。
+- 18 頁，多出的是 A-2 引用商品清單續頁，與規格「14–17 頁、沒有（續）頁」的矛盾仍待裁示。
+- 進度句仍有英文（`Checking the Brand data file's query keys for each platform`、`Tallying the matches and overrides per shop`），另有一句簡體（`检查可用的商务工具。`）。
+
 ### 各場模型對照（2026-10-29 整理）
 
 | 試跑 | 模型 | 確認有印內容 | 建任務清單 | 中途壓縮 |
