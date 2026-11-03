@@ -115,6 +115,15 @@ def multiplier(t):
     return 1
 
 
+# 「共 N 入」寫的是總件數，有就直接用，不再和其他件數相乘：「68ml*12入*6盒 共72入」＝72 入，
+# 「共2盒40入」＝40 入（2026-11-03 白蘭氏、桂格、田原香實測）。包、袋常是外層包裝，不算在這裡。
+TOTAL_RE = r"共\s*(?:\d+\s*[盒組箱串]\s*)?(\d+)\s*(入|瓶|罐|條|件|顆|粒|片|支)"
+# 「共 N 盒」是外層件數；容量後面沒有件數時，用標題裡另外寫的「M 入」當每盒件數：
+# 「14入 共2盒(42ml/入)」＝28 入、「8入*50g(共3盒)」＝24 入
+OUTER_RE = r"共\s*(\d+)\s*(盒|組|箱|袋|包|串)"
+INNER_RE = r"(?<![\d.])(\d+)\s*(入|瓶|罐|包|袋)"
+
+
 def size_patterns(unit, g_ml_same):
     """回傳 [(容量正規式, 換算表)]；液體類可把克與毫升視為相同（1 克＝1 毫升）"""
     if g_ml_same and unit in ("每毫升", "每克"):
@@ -142,15 +151,24 @@ def unit_qty(title, unit, g_ml_same=False):
         return None, "組合含其他單位，無法判斷", None
     # 外層件數從剩下的標題找：「黑芝麻糊x2袋(30gx12入/袋)」＝30 克×12 入×2 袋；「(650gx4入/盒)三盒組」＝650×4×3
     outer = multiplier(rest)
+    total = re.search(TOTAL_RE, t)
+    sizes = {sz for sz, _ in found}
+    if total and len(sizes) == 1:
+        s, n = sizes.pop(), int(total.group(1))
+        return s * n, f"{s:g}×{n}", s
     if len(found) > 1 and re.search(r"[+＋]", t):
         # 組合包：「1800ml×1 瓶＋1700ml×2 包」→ 每段容量×件數加總；「700g+100g（4罐）」再乘外層件數
         total = sum(sz * k for sz, k in found) * outer
         return total, "＋".join(f"{sz:g}×{k}" for sz, k in found) + (f"，共 {outer} 組" if outer > 1 else ""), max(sz for sz, _ in found)
-    sizes = {sz for sz, _ in found}
     if len(sizes) > 1:
         return None, "多種容量，無法判斷", None
     s = sizes.pop()
     k = found[0][1] * outer
+    box = re.search(OUTER_RE, rest)
+    if found[0][1] == 1 and box:
+        inner = re.search(INNER_RE, rest.replace(box.group(0), " "))
+        if inner:
+            k = int(inner.group(1)) * int(box.group(1))
     return s * k, f"{s:g}×{k}", s
 
 
