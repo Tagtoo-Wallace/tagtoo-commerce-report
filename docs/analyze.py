@@ -146,8 +146,10 @@ def unit_qty(title, unit, g_ml_same=False):
         return None, "標題沒有容量", None
     if re.search(r"任選|多款|款式可選", t) and re.search(r"[+＋/／]", t):
         return None, "多款任選，無法判斷", None
+    # 組合同時有毫升與克時不換算，克毫升同視也一樣：「雞精68ml*3入+葉黃素飲60ml*2入+燕窩42g*3入」是跨品類禮盒，
+    # 換算出來也不是該品類的單價（2026-11-03 白蘭氏V2 實測）
     other = {"每毫升": "每克", "每克": "每毫升"}.get(unit)
-    if other and not g_ml_same and re.search(r"[+＋]", t) and re.search(UNIT_RE[other][0], t, re.I):
+    if other and re.search(r"[+＋]", t) and re.search(UNIT_RE[other][0], t, re.I) and re.search(UNIT_RE[unit][0], t, re.I):
         return None, "組合含其他單位，無法判斷", None
     # 外層件數從剩下的標題找：「黑芝麻糊x2袋(30gx12入/袋)」＝30 克×12 入×2 袋；「(650gx4入/盒)三盒組」＝650×4×3
     outer = multiplier(rest)
@@ -158,6 +160,10 @@ def unit_qty(title, unit, g_ml_same=False):
         return s * n, f"{s:g}×{n}", s
     if len(found) > 1 and re.search(r"[+＋]", t):
         # 組合包：「1800ml×1 瓶＋1700ml×2 包」→ 每段容量×件數加總；「700g+100g（4罐）」再乘外層件數
+        # 各段有寫件數、且外層件數等於各段總和時，那是禮盒自己的總件數，不再相乘：「6入(雞精68ml*3入+雞精膠原68ml*3入)」＝408 毫升；
+        # 各段都沒寫件數時照乘：「700g+100g（2罐）」＝1600 克
+        if any(k > 1 for _, k in found) and outer == sum(k for _, k in found):
+            outer = 1
         total = sum(sz * k for sz, k in found) * outer
         return total, "＋".join(f"{sz:g}×{k}" for sz, k in found) + (f"，共 {outer} 組" if outer > 1 else ""), max(sz for sz, _ in found)
     if len(sizes) > 1:
