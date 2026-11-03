@@ -18,6 +18,8 @@ analyze.py — 品牌比對、通路分類、統計，產出摘要與簡報共�
 摘要與簡報都讀這三個檔，不重新查詢，數字才會一致。
 
 用法：python3 analyze.py --raw raw --brands brands.json --out .
+      印摘要前最後一次執行加 --lock：在輸出資料夾留下鎖定標記 .summary_locked，之後數字不可再變。
+      已鎖定時再執行會印 🛑 並停止；只有對方在摘要確認時要求修改，才加 --unlock 重跑（重跑後維持鎖定）。
 
 brands.json 範例：
 {
@@ -403,7 +405,16 @@ def main():
     ap.add_argument("--raw", default="raw")
     ap.add_argument("--brands", default="brands.json")
     ap.add_argument("--out", default=".")
+    ap.add_argument("--lock", action="store_true", help="摘要前最後一次執行：跑完後鎖定數字")
+    ap.add_argument("--unlock", action="store_true", help="對方要求修改摘要時才用：允許重跑，跑完維持鎖定")
     a = ap.parse_args()
+
+    lock_path = os.path.join(a.out, ".summary_locked")
+    was_locked = os.path.exists(lock_path)
+    if was_locked and not a.unlock:
+        print("🛑 摘要已確認，數字已鎖定：不重跑分析、不改 brands.json，簡報照已確認的 deck_parts.json 與 stats.json 產出。"
+              "只有對方在摘要確認時要求修改，才加 --unlock 重跑。")
+        sys.exit(2)
 
     cfg = json.load(open(a.brands, encoding="utf-8"))
     unit = cfg.get("unit", "每件")
@@ -577,6 +588,9 @@ def main():
             json.dump(obj, f, ensure_ascii=False, indent=1)
     with open(os.path.join(a.out, "summary_draft.md"), "w", encoding="utf-8") as f:
         f.write(summary_draft(brands, stats, unit, unit_comparable))
+    if a.lock or was_locked:
+        with open(lock_path, "w", encoding="utf-8") as f:
+            f.write("摘要數字已鎖定\n")
 
     # ── 只印統計 ──
     print(f"比價單位：{unit}；商品 {len(items)} 筆（已剔除他牌與重複頁面）")
