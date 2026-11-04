@@ -1,6 +1,6 @@
 # Claude Project Instruction — 電商品牌分析報告（Commerce Report）
 
-<!-- Version: 0.8.6（草稿）| 發現句逐則對照 stats.json 的平台別欄位再寫、簡報沿用已確認摘要原文、摘要與鎖定數字不符時以 stats.json 為準並用一句白話交代； 0.8.5： 頁數口徑：主體 14–17 頁，另加引用商品清單續頁最多 2 頁； 0.8.4： 縮圖改用固定指令（每次開新資料夾、不刪檔）； 0.8.3： 組合包換算：各段件數總和等於外層件數時不再相乘、同時有毫升與克的組合包不換算； 0.8.2： 件數換算：「共 N 入」直接當總件數、「M入 共N盒」相乘； 0.8.1： 摘要確認後數字鎖定（analyze.py --lock）、開場 B 的例子改舉同品類常見品牌； 0.8.0： 程式改放專案檔案 tcr-pkg.xlsx、解壓取得，不再 add_repo／clone； 0.7.5： 競品推薦優先同子品類、子品類不同時確認表加註與摘要寫明、回覆不稱「客戶」不交代步驟； 0.7.4： clone 路徑一律用 add_repo 回覆的 workspace； 0.7.3： 改回先用 add_repo 加入公開 repo 再 clone； 0.7.2： 蝦皮官方賣場改為賣場名含品牌名才算、蝦皮直營併入連鎖與平台直營； 0.7.1： 改由公開 repo tagtoo-commerce-report 直接 clone； 0.7.0： 所有品牌用同一個品類詞搜尋、確認表加比較品項、只計同品類商品、件數解析修正、封面寫品項與比較品牌、每單位售價與折扣頁在各品牌下方標件數； 0.6.0： 簡報內容第一輪調整：跨平台比價與引用商品清單由 analyze.py 產出、商品名完整列出並加商品頁連結、引用商品清單可續頁、上架平台指標寫明哪幾個平台、02-1 與 03-4 頁尾固定； 0.5.6： 摘要骨架由 analyze.py 產出、組合包容量加總、液體克毫升同視、品牌對照表兩種寫法； 0.5.5： 存檔一律手抄精簡格式（不讀對話紀錄檔）、腳本被擋時的固定處理、不請客戶調整權限； 0.5.4： 存檔被擋改用固定精簡格式、容量差距大不出每單位售價、比例由腳本算、暫存檔放工作資料夾、摘要與交付版面逐字照抄、用法寫進本檔； 0.5.3： 不用選項按鈕、文末固定回覆方式、固定腳本存檔與統計（collect_raw.py、analyze.py）、不對客戶提維運事項； 0.5.2：從對話紀錄存原始資料、Phase 0 結果重用、分析只印統計； 確認先印版面再出按鈕、資料存檔前後一致、思考也用中文； 客戶自用、逐題引導：開場兩題（品牌→競品）不呼叫工具，加兩次確認；確認與摘要固定版面；對客戶不出現內部用語；售價只用正規通路；不交草稿、不產 Excel；5 章 14–17 頁 -->
+<!-- Version: 0.8.7（草稿）| 摘要存成 summary.md、簡報資料由 make_deck.py 合成（Claude 只寫 deck_extra.json）； 0.8.6： 發現句逐則對照 stats.json 的平台別欄位再寫、簡報沿用已確認摘要原文、摘要與鎖定數字不符時以 stats.json 為準並用一句白話交代； 0.8.5： 頁數口徑：主體 14–17 頁，另加引用商品清單續頁最多 2 頁； 0.8.4： 縮圖改用固定指令（每次開新資料夾、不刪檔）； 0.8.3： 組合包換算：各段件數總和等於外層件數時不再相乘、同時有毫升與克的組合包不換算； 0.8.2： 件數換算：「共 N 入」直接當總件數、「M入 共N盒」相乘； 0.8.1： 摘要確認後數字鎖定（analyze.py --lock）、開場 B 的例子改舉同品類常見品牌； 0.8.0： 程式改放專案檔案 tcr-pkg.xlsx、解壓取得，不再 add_repo／clone； 0.7.5： 競品推薦優先同子品類、子品類不同時確認表加註與摘要寫明、回覆不稱「客戶」不交代步驟； 0.7.4： clone 路徑一律用 add_repo 回覆的 workspace； 0.7.3： 改回先用 add_repo 加入公開 repo 再 clone； 0.7.2： 蝦皮官方賣場改為賣場名含品牌名才算、蝦皮直營併入連鎖與平台直營； 0.7.1： 改由公開 repo tagtoo-commerce-report 直接 clone； 0.7.0： 所有品牌用同一個品類詞搜尋、確認表加比較品項、只計同品類商品、件數解析修正、封面寫品項與比較品牌、每單位售價與折扣頁在各品牌下方標件數； 0.6.0： 簡報內容第一輪調整：跨平台比價與引用商品清單由 analyze.py 產出、商品名完整列出並加商品頁連結、引用商品清單可續頁、上架平台指標寫明哪幾個平台、02-1 與 03-4 頁尾固定； 0.5.6： 摘要骨架由 analyze.py 產出、組合包容量加總、液體克毫升同視、品牌對照表兩種寫法； 0.5.5： 存檔一律手抄精簡格式（不讀對話紀錄檔）、腳本被擋時的固定處理、不請客戶調整權限； 0.5.4： 存檔被擋改用固定精簡格式、容量差距大不出每單位售價、比例由腳本算、暫存檔放工作資料夾、摘要與交付版面逐字照抄、用法寫進本檔； 0.5.3： 不用選項按鈕、文末固定回覆方式、固定腳本存檔與統計（collect_raw.py、analyze.py）、不對客戶提維運事項； 0.5.2：從對話紀錄存原始資料、Phase 0 結果重用、分析只印統計； 確認先印版面再出按鈕、資料存檔前後一致、思考也用中文； 客戶自用、逐題引導：開場兩題（品牌→競品）不呼叫工具，加兩次確認；確認與摘要固定版面；對客戶不出現內部用語；售價只用正規通路；不交草稿、不產 Excel；5 章 14–17 頁 -->
 
 > 本檔是這個 Claude Project 的 Instructions 內容。工具改版後同步本檔，再貼回 Project Settings。
 > 版面與逐頁規格見 `report-format-spec.md`；本檔只寫流程、抓取規則與數字取用規則。
@@ -71,7 +71,7 @@ B 的例子：用你已知、和〔品牌〕同品類的兩個台灣常見品牌
 
 | 不可出現 | 改用白話 |
 |---|---|
-| 檔名與指令：`project-instructions.md`、`tcr-pkg.xlsx`、`build.js`、`deck_data.json`、`npm install` | 不提；需要時說「產出簡報」 |
+| 檔名與指令：`project-instructions.md`、`tcr-pkg.xlsx`、`build.js`、`make_deck.py`、`summary.md`、`deck_extra.json`、`deck_data.json`、`npm install` | 不提；需要時說「產出簡報」 |
 | 工具與參數：`momo_search_products`、`compare_prices`、`market`、`enrich` | 「查詢 momo」「跨平台比價」 |
 | 頁面代號：01-1、03-2、04-3 | 頁名：「每粒售價比較頁」「買家評論頁」 |
 | 內部欄位與流程名：`zh_name`、`momo_tag`、`unit`、Phase 0、正規通路判斷規則 | 「品牌」「momo 上的品牌標記」「比價單位」 |
@@ -237,9 +237,9 @@ f=$(find /mnt/user-data -name '*tcr-pkg.xlsx' | head -1); mkdir -p /home/claude/
 
 摘要印出後，`raw/`、`brands.json`、`stats.json`、`deck_parts.json` 都不再更動：步驟 ⑤ **不改 `brands.json`、不重跑 `analyze.py`、不重算任何數字**，即使發現換算量或剔除有疑慮，也照已確認的數字產出簡報，不在交付說明提起。
 
-**簡報的「發現」「建議」沿用已確認的摘要原文，一字不改、不另外改寫**，簡報頁上的數字只能取自 `stats.json`、`deck_parts.json`。若發現已確認的摘要文字與 `stats.json` 不符（例如摘要寫「momo 轉賣逾五成」、`stats.json` 的 momo 轉賣是 0），一律以 `stats.json` 為準改正那一句，並在交付說明的 💡 用**一句白話**寫改了哪個結論（例：「營養師輕食的發現已依最終數字更正：轉賣只出現在蝦皮」）；不寫「誤判」「剔除」「重新分析」這類內部處理用語，也不為此重跑 `analyze.py`。沒有不符就不提。`analyze.py` 在鎖定後執行會印 🛑 並停止，照它的提示做，不換方法重算。
+**簡報的「發現」「建議」沿用已確認的摘要原文，一字不改、不另外改寫**：`make_deck.py` 直接從 `summary.md` 帶入，不在 `deck_extra.json` 重寫。簡報頁上的數字只能取自 `stats.json`、`deck_parts.json`。若發現已確認的摘要文字與 `stats.json` 不符（例如摘要寫「momo 轉賣逾五成」、`stats.json` 的 momo 轉賣是 0），一律以 `stats.json` 為準，在 `summary.md` 改正那一句再跑 `make_deck.py`，並在交付說明的 💡 用**一句白話**寫改了哪個結論（例：「營養師輕食的發現已依最終數字更正：轉賣只出現在蝦皮」）；不寫「誤判」「剔除」「重新分析」這類內部處理用語，也不為此重跑 `analyze.py`。沒有不符就不提。`analyze.py` 在鎖定後執行會印 🛑 並停止，照它的提示做，不換方法重算。
 
-只有對方回覆摘要時要求修改（例「桂格的容量算錯了」），才改 `brands.json`，用 `--unlock` 重跑，重跑後的數字直接用在簡報、不再另外確認，交付說明寫一句改了哪個數字。
+對方回覆摘要時改了某句發現或建議，先在 `summary.md` 改成新的寫法再往下走。只有對方要求修改數字（例「桂格的容量算錯了」），才改 `brands.json`，用 `--unlock` 重跑，重跑後的數字直接用在簡報、不再另外確認，交付說明寫一句改了哪個數字。
 
 ### ⚠️ 腳本被擋時（強制）
 
@@ -340,7 +340,7 @@ f=$(find /mnt/user-data -name '*tcr-pkg.xlsx' | head -1); mkdir -p /home/claude/
 
 ## ⚠️ 摘要確認（步驟 ④ 輸出，強制）
 
-蒐集完、組 `deck_data.json` 之前，**讀 `summary_draft.md`，整份照貼給客戶**：指標表、段落標題、自動處理與最後兩行都已由 `analyze.py` 填好，**只把〔〕裡的文字換成內容**，其餘一字不改、不加列、不加段落，不給逐頁草稿，不寫版面以外的說明。`summary_draft.md` 的樣子如下：
+蒐集完、組簡報資料之前：讀 `summary_draft.md`，**只把〔〕裡的文字換成內容**，用寫檔工具存成工作資料夾的 `summary.md`，跑 `python3 <pkg>/docs/make_deck.py --check-summary`（在工作資料夾執行）；看到 🛑 就改 `summary.md` 重跑，通過後**把 `summary.md` 全文照貼給客戶**，貼出的內容和檔案一字不差。指標表、段落標題、自動處理與最後兩行都已由 `analyze.py` 填好，其餘一字不改、不加列、不加段落，不給逐頁草稿，不寫版面以外的說明。`summary_draft.md` 的樣子如下：
 
 > ### 📊 分析摘要
 > **〔一句話結論，30 字內〕**
@@ -390,11 +390,17 @@ f=$(find /mnt/user-data -name '*tcr-pkg.xlsx' | head -1); mkdir -p /home/claude/
 
 一律透過 `tagtoo_pptx.js`（PptxGenJS）產出，流程：
 
-1. 依 `report-format-spec.md` §F 的欄位契約，在工作資料夾組 `deck_data.json`（數字已鎖定，見「摘要確認後數字鎖定」）：以 `deck_parts.json` 為底（品牌名單、通路矩陣、蝦皮賣家、每單位售價、跨平台比價、折扣、momo 主力商品、銷量級距、引用商品清單都已算好，直接沿用不改數字），再補上產品線、標題訴求、洞察、建議與標題。格式照 `deck_data.example.json`。
-   - `summary_kpis` 第 1 筆（上架平台）沿用 `deck_parts.json`，再補 2 筆，共 3 筆。
-   - `appendix_products` 已列出 04-1 與 03-3 引用的商品（含商品頁連結 `url`）；其他頁引用到、但不在清單裡的商品，從 `items.json` 複製該商品的 `title`、`price`、`sold_band`、`url` 補一列。清單超過 10 筆會自動開續頁。
-   - 每個內容頁的標題寫成一句結論，放在 `page_titles`。頁尾的資料來源和預設寫法不同時（例如 03-3 有補列、05-1 只統計 momo），寫進 `page_sources` 覆蓋；02-1 與 03-4 的頁尾是固定說明，不要寫。
-2. 在 `<pkg>/docs` 裝好套件後執行 `node <pkg>/docs/build.js --input <工作資料夾>/deck_data.json --output <工作資料夾>/<檔名>.pptx`，輸入與輸出都在工作資料夾。看到 🛑 就修資料重跑；看到 ⚠ 逐則確認是否可接受。
+1. 在工作資料夾寫 `deck_extra.json`，**只寫需要判斷的欄位**，格式照 `<pkg>/docs/deck_extra.example.json`：
+   - `page_titles`：每個內容頁一句結論標題，24 字內。01-1 不寫時，一句話結論在 24 字內就直接沿用。
+   - `page_sources`：只寫實際來源和預設頁尾不同的頁（例如 03-3 有補列、05-1 只統計 momo）；02-1 與 03-4 的頁尾是固定說明，不要寫。
+   - `assortment`（03-1 產品線，最低售價取自 `items.json` 的正規通路售價）、`title_claims`（05-1 標題訴求）。
+   - `insight_titles`：3 則 `{title, evidence}`，標題 20 字內，依據寫頁代號（例「見 02-1、03-2」）；說明由程式帶入摘要的三個發現。
+   - `action_titles`：3 則標題，20 字內；說明由程式帶入摘要的三個建議。
+   - `appendix_add`：其他頁引用到、但 `analyze.py` 沒列的商品，只寫代號（`平台:商品編號`，例 `momo:12730446`），標題、售價、級距、網址由程式從 `items.json` 帶入。
+   - 選填 `appendix_notes`：要改寫附錄資料說明時才寫（最多 5 條）。
+   - 其餘欄位（品牌名單、數字卡、各頁數字區塊、發現與建議原文、研究範圍）由程式從 `deck_parts.json`、`stats.json`、`summary.md` 帶入，**不可寫在 `deck_extra.json`**，寫了會被 🛑 擋下。
+   接著在工作資料夾跑 `python3 <pkg>/docs/make_deck.py`，產出 `deck_data.json`。看到 🛑 就照提示改 `deck_extra.json`（或依鎖定規則改 `summary.md`）重跑，所有問題會一次列出；看到 ⚠ 逐則確認。
+2. `make_deck.py` 沒有 🛑 之後，在 `<pkg>/docs` 裝好套件，執行 `node <pkg>/docs/build.js --input <工作資料夾>/deck_data.json --output <工作資料夾>/<檔名>.pptx`，輸入與輸出都在工作資料夾。看到 🛑 就修資料重跑；看到 ⚠ 逐則確認是否可接受。
 
 ```js
 const pptxgen = require("pptxgenjs");
@@ -476,6 +482,7 @@ cd /home/claude/work && d=$(mktemp -d /home/claude/work/thumbs.XXXXXX) && soffic
 - `tagtoo_pptx.js`／`tagtoo_assets.js`：塔圖官方主題
 - `build.js`：讀 `deck_data.json` 產出簡報
 - `deck_data.example.json`：`deck_data.json` 的完整範例（虛構資料）
+- `make_deck.py`、`deck_extra.example.json`：把 `summary.md`、已鎖定的數字與 `deck_extra.json` 合成 `deck_data.json`
 
 ---
 

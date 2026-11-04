@@ -13,8 +13,8 @@ import re
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FILES = ["analyze.py", "build.js", "tagtoo_pptx.js", "tagtoo_assets.js",
-         "package.json", "deck_data.example.json"]
+FILES = ["analyze.py", "make_deck.py", "build.js", "tagtoo_pptx.js", "tagtoo_assets.js",
+         "package.json", "deck_data.example.json", "deck_extra.example.json"]
 OUT = os.path.join(ROOT, "dist", "tcr-pkg.xlsx")
 STAMP = (2026, 1, 1, 0, 0, 0)  # 固定時間戳，同樣內容產出同樣的檔
 

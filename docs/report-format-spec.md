@@ -254,7 +254,7 @@
 ### A-2 引用商品清單
 - 副標：本報告各頁引用的商品
 - 主體：表格 5 欄（品牌｜平台｜商品名｜售價｜銷量級距），每頁 10 列，8pt，超過就開續頁（標題加「（續）」，最多 30 筆）；商品名完整列出、最多兩行，有 `url` 時加商品頁超連結
-- 範圍：`analyze.py` 先列 04-1 與 03-3 引用的商品；其他頁引用的商品由 Claude 從 `items.json` 補（含 `url`）
+- 範圍：`analyze.py` 先列 04-1 與 03-3 引用的商品；其他頁引用的商品由 Claude 在 `deck_extra.json` 的 `appendix_add` 寫代號，`make_deck.py` 從 `items.json` 帶入（含 `url`）
 - 資料鍵：`appendix_products.rows[]` → `idx`、`brand`、`platform`、`title`、`price`、`sold_band`；`url` 選填
 - 頁尾：`本報告各頁引用的商品；各平台抽樣與剔除筆數見研究範圍頁`
 - 本報告不另產完整抽樣清單 Excel；A-2 就是簡報的商品附件
