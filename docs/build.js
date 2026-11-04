@@ -2,7 +2,7 @@
 /**
  * build.js — 電商品牌分析報告產生器（PptxGenJS，塔圖主題）
  * ------------------------------------------------------------------
- * 讀 deck_data.json（Claude 依 Commerce MCP 資料組成），產出精簡版 14–17 頁報告。
+ * 讀 deck_data.json（Claude 依 Commerce MCP 資料組成），產出精簡版報告：主體 14–17 頁，另加 A-2 續頁最多 2 頁。
  * 欄位契約、逐頁規格見 report-format-spec.md §E、§F。
  *
  *   npm install pptxgenjs
