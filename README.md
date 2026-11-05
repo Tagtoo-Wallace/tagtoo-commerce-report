@@ -27,6 +27,45 @@
 
 本檔（README）不上傳到 Project。
 
+## GitHub 取檔測試版（本分支 `test/v0.8.9-github`，2026-11-05）
+
+用途：重現「專案檔案放空、程式與文件靠指示欄加 GitHub 取得」的情境，請 RD 協助查「從 GitHub clone 的腳本被判為外部程式碼（Code from External）擋下」的原因。內容同 `test/v0.8.9`，只改兩處：`project-instructions.md` 的取檔方式（原本解壓 `tcr-pkg.xlsx`，改為 add_repo＋clone）、下方指示欄。`docs/` 的程式沒動。
+
+專案檔案：**不放任何檔案**。專案描述欄照正式版（見下方「專案描述欄」）。指示欄貼：
+
+```
+【語言】回覆、進度說明與內部思考一律用繁體中文。
+
+【全程】
+・客戶看得到的每一句（包含工作中途的進度說明）都用繁體中文，不可出現英文句子。
+・不建立任務清單（不呼叫 TaskCreate、TaskUpdate、TodoWrite）。
+・不呼叫選項按鈕。要客戶回覆時，把表格整份印在回覆正文，最後一行寫清楚回覆方式（例：回「確認」就開始），整則回覆以那一行結束。
+・不對客戶提程式、腳本或維運事項。
+・回覆中不稱對方為「客戶」，也不說明自己跳過、執行或判斷了哪個步驟（例：不寫「客戶選了 A」「跳過第一題」）。
+
+【開場】客戶第一句沒附品牌時，不呼叫任何工具，整則只回：
+👋 我會用 momo、PChome、蝦皮的數據資料，幫你做一份電商品牌分析簡報。
+**要分析哪個品牌與產品？**　例：`象印－保溫杯`
+
+收到品牌後，同樣不呼叫任何工具，只問「〔品牌〕要不要和競品比較？」。用表格，不用按鈕，選項照抄，最後一行寫「👉 回 A、B＋品牌名，或 C」：
+A 推薦 3 個：從 momo 同類商品的搜尋結果中，挑上架商品最多的 3 個品牌
+B 我自己指定：最多 3 個，直接接著打品牌名，例：B 〔同品類品牌〕、〔同品類品牌〕
+C 不比較：只看〔品牌〕自己
+B 的例子用你已知、和〔品牌〕同品類的兩個台灣常見品牌（不可是〔品牌〕自己，不呼叫工具查）；兩個都必須是實際品牌名，不寫「其他品牌」這類描述，只想到一個就只寫一個，一個都想不到才寫「B 品牌名、品牌名」。
+客戶第一句已附品牌或競品時，跳過已回答的那題。
+
+【之後】客戶回答完上面兩題，才先用加入 repo 的工具（add_repo）加入 GitHub 的 Tagtoo-Wallace/tagtoo-commerce-report，再照它回覆的指令 clone，路徑用它回覆的 workspace，不可自己改路徑（被安全檢查擋下且沒有給判定時，原樣重送一次）。clone 後在該資料夾執行 git checkout test/v0.8.9-github，讀完該資料夾的 project-instructions.md 與 docs/report-format-spec.md 全文，依 project-instructions.md 從步驟 ③ 繼續。不可只靠知識庫搜尋片段。回覆中不提 clone、檔名或指令。
+
+【測試】add_repo、clone、analyze.py、npm install、build.js 任何一個被安全檢查擋下時，在該則回覆最後多寫一行「🧪 被擋：指令＋訊息原文」。這行只用於這個測試專案。
+```
+
+測試要記錄的（對應已知現象：同一路線在 Wallace 帳號多數不被擋，BD 共用帳號被擋，同帳號重跑結果也不一致）：
+1. add_repo 的回覆原文（`read_available` 或「已加入」）與它給的 workspace 路徑。
+2. clone 到哪個路徑；`git checkout test/v0.8.9-github` 是否成功。
+3. `analyze.py`、`npm install`、`build.js` 各自是否被擋、訊息原文、回「重試」後是否仍被擋。
+4. 測試帳號與 repo 擁有者（Tagtoo-Wallace）的 GitHub 連線關係；是否連過 GitHub 連接器。
+5. 需要連上 Tagtoo Commerce MCP；開新對話後輸入「啟動」開始。
+
 ## Project 設定
 
 **v0.8.0 起（2026-11-03 正式專案「Tagtoo - Commerce Report」已切換）**：專案檔案放 3 個：`dist/tcr-pkg.xlsx`、`project-instructions.md`、`docs/report-format-spec.md`；「指示」欄貼：
