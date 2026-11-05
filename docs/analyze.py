@@ -123,6 +123,24 @@ TOTAL_RE = r"共\s*(?:\d+\s*[盒組箱串]\s*)?(\d+)\s*(入|瓶|罐|條|件|顆|
 # 「14入 共2盒(42ml/入)」＝28 入、「8入*50g(共3盒)」＝24 入
 OUTER_RE = r"共\s*(\d+)\s*(盒|組|箱|袋|包|串)"
 INNER_RE = r"(?<![\d.])(\d+)\s*(入|瓶|罐|包|袋)"
+# 緊接在容量後的件數與箱數（2026-11-05 亞培安素實測，舊版只認「x24」，下列寫法都少算）：
+# 「250mlx24罐/2箱」＝48 罐、「237ml/24罐/箱」＝24 罐、「250g/3罐」＝3 罐、「(250mlx24入) 2箱」與「250mlx24瓶/箱 2箱」＝48 入、
+# 「(237mlx24罐x2箱)+237ml x 4罐」＝52 罐。「2箱免運」「一單最多3箱」「2箱只能新竹物流」是運費與限購，不算箱數。
+_NOT_SIZE = r"(?![\d.])(?!\s*(?:ml|毫升|公升|kg|公斤|g|公克|克|l(?![a-z])))"
+SEG_TAIL = (r"(?:\s*[x×*＊/／]\s*(?P<n>\d+)" + _NOT_SIZE + r"\s*(?:入|瓶|罐|包|袋|杯|條|支|盒|粒|顆)?)?"
+            r"(?:\s*[)）]?\s*[x×*＊/／]\s*(?P<bx>\d*)\s*箱)?"
+            r"(?:\s*[)）]?\s*(?P<bx2>\d+)\s*箱(?!\s*(?:免運|送|贈|只|以上|宅配|特價|特惠)))?")
+# 贈品算進總量（售價包含贈品；2026-11-05 Wallace 裁示）：只算標題寫明、且只出現一次的「加贈／贈／送 N 罐」；
+# 「1箱送2罐/2箱送5罐」這種分級寫法不算。「每箱送 N 罐」乘上箱數。「共 N 罐」已含贈品，走 TOTAL_RE，不再另加。
+GIFT_RE = r"(每\s*[一1]?\s*箱)?\s*(?:加贈|隨貨贈|贈|送)\s*(\d+)\s*(罐|瓶|入|包|杯|盒)"
+
+
+def gift_count(t, boxes):
+    gs = re.findall(GIFT_RE, t)
+    if len(gs) != 1:
+        return 0
+    each, n, _ = gs[0]
+    return int(n) * (boxes if each else 1)
 
 
 def size_patterns(unit, g_ml_same):
@@ -139,9 +157,13 @@ def unit_qty(title, unit, g_ml_same=False):
     t = title.replace("ＭＬ", "ml").replace("Ｇ", "g")
     pats = size_patterns(unit, g_ml_same)
     found, rest = [], t   # found：(容量, 緊接在容量後的件數)；rest：拿掉「容量×件數」後剩下的標題
+    boxes_seen = 1
     for pat, scale in pats:
-        for m in re.finditer(pat + r"(?:\s*[x×*＊]\s*(\d+))?", t, re.I):
-            found.append((float(m.group(1)) * scale[m.group(2).lower()], int(m.group(3)) if m.group(3) else 1))
+        for m in re.finditer(pat + SEG_TAIL, t, re.I):
+            k = int(m.group("n")) if m.group("n") else 1
+            box = int(m.group("bx")) if m.group("bx") else int(m.group("bx2")) if m.group("bx2") else 1
+            boxes_seen = max(boxes_seen, box)
+            found.append((float(m.group(1)) * scale[m.group(2).lower()], k * box))
             rest = rest.replace(m.group(0), " ", 1)
     if not found:
         return None, "標題沒有容量", None
@@ -176,6 +198,9 @@ def unit_qty(title, unit, g_ml_same=False):
         inner = re.search(INNER_RE, rest.replace(box.group(0), " "))
         if inner:
             k = int(inner.group(1)) * int(box.group(1))
+    g = gift_count(t, boxes_seen)
+    if g:
+        return s * (k + g), f"{s:g}×{k}＋贈 {g}", s
     return s * k, f"{s:g}×{k}", s
 
 

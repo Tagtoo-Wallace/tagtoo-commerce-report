@@ -406,7 +406,7 @@ function pAssortment(ctx) {
 
 function pUnitPrice(ctx) {
   const unit = data.unit_price?.unit || "每單位";
-  const s = slideOf({ ...ctx, ds: DS(ctx, "依商品標題容量換算；只計正規通路，換算不出的不列入｜樣本數見各品牌下方") });
+  const s = slideOf({ ...ctx, ds: DS(ctx, "依商品標題容量換算，標題寫明的贈品算進總量；只計正規通路，換算不出的不列入｜樣本數見各品牌下方") });
   const rows = [...D.unit];
   const mm = data.unit_price?.market_median;
   if (mode === "single" && !isBlank(mm)) rows.push({ label: "同品類市場中位數", n: null, median: mm, _ref: true });

@@ -135,7 +135,7 @@ def scope_items(parts, stats, client, rivals, fetched):
         f"研究品牌：{client}；比較競品：{'、'.join(rivals)}" if rivals else f"研究品牌：{client}（不比較競品）",
         f"搜尋字：「品牌名 {cat}」，台灣市場" if cat else "搜尋字：品牌名，台灣市場",
         "抽樣／剔除／留下筆數：" + "、".join(per),
-        "比價單位：每件（本品類以件計價）" if u["unit"] == "每件" else f"比價單位：{u['unit']}，依商品標題容量換算",
+        "比價單位：每件（本品類以件計價）" if u["unit"] == "每件" else f"比價單位：{u['unit']}，依商品標題容量換算，標題寫明的贈品算進總量",
         f"資料擷取日：{fetched}",
     ]
 
