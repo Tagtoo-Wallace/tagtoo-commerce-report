@@ -15,6 +15,8 @@ make_deck.py — 把已確認的摘要與已鎖定的數字合成 deck_data.json
   - summary_findings、insights[].body 取摘要「三個發現」原文；actions[].body 取「三個建議」原文。
   - summary_kpis 三張卡取自 stats.json，和摘要指標表同一組數字。
   - scope_items、appendix_notes 由本程式依 stats.json 產出（appendix_notes 可在 deck_extra.json 改寫）。
+  - deck_extra.json 的 compare_drop 寫要排除的跨平台比價列（照 deck_parts.json 的 item 原文），本程式移除並在頁尾註明。
+    合成後不可再改 deck_data.json；看起來配錯的比價列一律用 compare_drop 排除。
   - deck_extra.json 的 appendix_add 只寫商品代號（「平台:商品編號」），標題、售價、級距、網址由 items.json 帶入。
 所有問題一次列出：🛑 要修正後重跑，⚠ 逐則確認是否可接受。
 
@@ -29,7 +31,9 @@ TITLE_MAX, LINE_MAX, ITEM_TITLE_MAX, ITEM_BODY_MAX = 24, 40, 20, 60
 PAGE_CODE = re.compile(r"\b(0[1-5]-\d|A-[12])\b")
 # deck_extra.json 只能有這些鍵；數字區塊與摘要原文不在其中
 EXTRA_KEYS = {"page_titles", "page_sources", "assortment", "title_claims", "insight_titles",
-              "action_titles", "appendix_add", "appendix_notes", "fetched_at"}
+              "action_titles", "appendix_add", "appendix_notes", "fetched_at", "compare_drop"}
+# 和 build.js 03-3 的預設頁尾一致；排除比價列時接在後面
+COMPARE_SRC = "同品牌、同容量與件數，系列相同、品名相近的正規通路商品；同平台多筆取品名最接近者"
 LOCKED_KEYS = {"client", "brands", "category", "category_keywords", "summary_kpis", "summary_findings",
                "channel_matrix", "shopee_sellers", "unit_price", "price_compare", "discount", "momo_top",
                "sold_band", "appendix_products", "insights", "actions", "scope_items", "mode"}
@@ -247,6 +251,20 @@ def main():
     for k, r in enumerate(appx, 1):
         r["idx"] = k
 
+    # 03-3：配錯的比價列只能用 compare_drop 排除，頁尾自動註明，比價數字本身不改
+    compare = [dict(r) for r in parts["price_compare"]["rows"]]
+    sources = dict(extra.get("page_sources") or {})
+    drop = extra.get("compare_drop") or []
+    names = [r["item"] for r in compare]
+    for x in drop:
+        if x not in names:
+            stop(f"compare_drop「{x}」不在跨平台比價的品項裡（要照 deck_parts.json 的 item 原文）：{'／'.join(names)}")
+    if drop and not errors:
+        compare = [r for r in compare if r["item"] not in drop]
+        sources["03-3"] = (sources.get("03-3") or COMPARE_SRC) + f"；另排除 {len(drop)} 列品項不同的配對"
+        if not compare:
+            warn("跨平台比價全部排除，比價頁會寫「本次無資料」")
+
     notes = extra.get("appendix_notes") or appendix_notes(stats, client)
     if not 1 <= len(notes) <= 5:
         stop(f"appendix_notes 要 1–5 條，目前 {len(notes)} 條")
@@ -260,14 +278,14 @@ def main():
         "brand_primary_color": "873222",
         "brands": parts["brands"],
         "page_titles": titles,
-        "page_sources": extra.get("page_sources") or {},
+        "page_sources": sources,
         "summary_kpis": kpi_cards(parts, stats, client, rivals),
         "summary_findings": summ["findings"],
         "channel_matrix": parts["channel_matrix"],
         "shopee_sellers": parts["shopee_sellers"],
         "assortment": {"rows": assortment},
         "unit_price": parts["unit_price"],
-        "price_compare": parts["price_compare"],
+        "price_compare": {"rows": compare},
         "discount": parts["discount"],
         "momo_top": parts["momo_top"],
         "sold_band": parts["sold_band"],

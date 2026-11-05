@@ -440,7 +440,7 @@ function cheapestOf(r) {
   return { label: win.length === priced.length ? "同價" : win.map((p) => PLATFORM_LABEL[p]).join("、"), win: win.length === priced.length ? [] : win };
 }
 function pCompare(ctx) {
-  const s = slideOf({ ...ctx, ds: DS(ctx, "同品牌、同容量與件數，且品名相近的正規通路商品；同平台多筆取最低價") });
+  const s = slideOf({ ...ctx, ds: DS(ctx, "同品牌、同容量與件數，系列相同、品名相近的正規通路商品；同平台多筆取品名最接近者") });
   const rows = D.compare.map((r, i) => {
     const c = cheapestOf(r);
     return [

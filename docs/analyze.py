@@ -32,7 +32,8 @@ brands.json 範例：
       "query": "SAHOLEA 森歐黎漾 洗髮精",   // 三平台用的搜尋詞（要和實際查詢一字不差）
       "momo_tag": "SAHOLEA 森歐黎漾",       // momo 標題【】裡的品牌標記（完全相符才算；有兩種寫法時給清單）
       "keywords": ["森歐黎漾", "SAHOLEA"],  // 蝦皮、PChome 標題比對用
-      "pchome_lines": ["淨平衡", "極緞光"]   // 選填：PChome 標題常不寫品牌，用產品線名稱比對
+      "pchome_lines": ["淨平衡", "極緞光"],  // 選填：PChome 標題常不寫品牌，用產品線名稱比對
+      "variants": ["淨平衡", "極緞光", "柔順"]  // 選填（客戶品牌建議填）：區分系列、口味、功能版本的字詞；跨平台比價只配區辨字相同的商品
     }
   ],
   "unit_overrides": { "momo:12730446": 2400, "pchome:DDBX7J-A900HEJTB": null }   // 選填：人工指定換算量，null＝不列入
@@ -361,6 +362,7 @@ def platform_kpi(matrix, brand):
 # ── 跨平台同品比價 ────────────────────────────────────────────────────────────
 # 同品牌、同總容量的正規通路商品，標題相似度達門檻才算同一品項；同平台有多筆符合時取最低售價
 SIM_MIN = 0.25
+SIM_MIN_VARIANT = 0.15   # 品牌有列系列區辨字、且兩邊區辨字相同時，品名相似度門檻放寬到這裡
 COMPARE_MAX = 6
 NOISE = ("官方", "公司貨", "正品", "現貨", "免運", "限定", "獨家", "momo", "pchome", "蝦皮", "直營", "旗艦")
 
@@ -372,6 +374,15 @@ def bigrams(title, b):
     t = re.sub(r"\d+(\.\d+)?\s*(ml|毫升|公升|l|kg|公斤|g|公克|克|入|包|瓶|罐|盒|組|顆|粒)?", "", t)
     t = re.sub(r"[^a-z\u4e00-\u9fff]", "", t)
     return {t[i:i + 2] for i in range(len(t) - 1)}
+
+
+def variant_set(title, b):
+    """標題含哪幾個系列區辨字（brands.json 的 variants，例：水光、晚安、葡萄柚）"""
+    # 只看品名主體：去掉【】與開頭的（N盒組），截到第一個括號，括號裡的成分與說明（燕窩酸、機能衣/運動衣）不算
+    t = re.sub(r"【[^】]*】", "", str(title or ""))
+    t = re.sub(r"^\s*[(（][^)）]*[)）]\s*", "", t)
+    t = re.split(r"[(（]", t, maxsplit=1)[0].lower()
+    return frozenset(v for v in b.get("variants") or [] if str(v).lower() in t)
 
 
 def sim(a, b_, brand):
@@ -396,10 +407,14 @@ def compare_rows(items, brands):
                 best = None
                 for anchor in sorted(group, key=lambda i: (PLATFORMS.index(i["platform"]), -(i["sold_value"] or 0))):
                     pick = {}
+                    va = variant_set(anchor["title"], b)
+                    floor = SIM_MIN_VARIANT if b.get("variants") else SIM_MIN
                     for pl in PLATFORMS:
-                        cands = [i for i in group if i["platform"] == pl and (i is anchor or sim(anchor, i, b) >= SIM_MIN)]
+                        # 系列區辨字不同（超能膠原飲 對 超能膠原水光飲）就不是同一品項；同平台多筆時取品名最接近的，同分才取低價
+                        cands = [i for i in group if i["platform"] == pl and (i is anchor or (
+                            variant_set(i["title"], b) == va and sim(anchor, i, b) >= floor))]
                         if cands:
-                            pick[pl] = min(cands, key=lambda i: i["price"])
+                            pick[pl] = min(cands, key=lambda i: (i is not anchor, -sim(anchor, i, b), i["price"]))
                     if best is None or len(pick) > len(best):
                         best = pick
                 if len(best) < 2:
